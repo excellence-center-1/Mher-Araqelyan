@@ -23,14 +23,14 @@ int jump_srch(int x[],int size,int value){
             }
             else{
                 for(int i=size-1;i>t;i--){
-                if(x[i]==value){
+                    if(x[i]==value){
                     return i;
-                }
+                    }
                 }
             }
         }
     }
-   
+    cout<<"Element not found";
     return -1;
 
 }
