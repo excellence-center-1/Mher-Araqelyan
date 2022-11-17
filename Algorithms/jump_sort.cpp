@@ -47,4 +47,5 @@ int main(){
      cout<<"Input the number you are interested in: ";
      cin>>fnum;
      cout<<"The index of number is: "<<jump_srch(a,n,fnum)<<endl;  
+     return 0;
 }
