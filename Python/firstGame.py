@@ -3,7 +3,7 @@ import random
 guessesTaken = 0
 
 print('Привет! как тебя зовут?')
-myName=input()
+mmyName=input()
 number=random.randint(0,20)
 print('Что ж, '+myName+',я загадываю число от 1 до 20.')
 for guessesTaken in range(6):
