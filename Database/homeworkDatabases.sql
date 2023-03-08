@@ -1,0 +1,17 @@
+//////POSTGRES
+CREATE DATABASE MY_DATA;
+CREATE USER user1 WITH PASSWORD 'pass1';
+CREATE USER user2 WITH PASSWORD 'pass2';
+GRANT ALL PRIVILEGES ON DATABASE my_db TO user1;
+REVOKE ALL ON DATABASE my_db FROM PUBLIC;
+GRANT CONNECT ON DATABASE my_db to user2;
+
+
+////////////MYSQL
+
+CREATE DATABASE my_db;
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'passuser1';
+CREATE USER 'user2'@'localhost' IDENTIFIED BY 'passuser2';
+GRANT ALL ON my_db.* TO user1@localhost;
+GRANT SELECT ON my_db.* TO user2@localhost;
+
