@@ -42,6 +42,15 @@ INSERT INTO factory_product(factory_id,product_id,price) values (2,3,75);
 INSERT INTO vendor_factory (vendor_id,factory_id,product_id,supplyprice) values (1,1,1,85);
 INSERT INTO vendor_factory (vendor_id,factory_id,product_id,supplyprice) values (1,1,2,95);
 INSERT INTO vendor_factory (vendor_id,factory_id,product_id,supplyprice) values (1,2,3,105);
-
+alter table vendor_factory add constraint fk_vendor_factory_vendor foreign key (vendor_id) references vendor(id);
+alter table vendor_factory add constraint fk_factory_fid foreign key (factory_id) references factory(id);
+alter table vendor_factory add constraint fk_product_pid foreign key (product_id) references product(id);
+alter table factory_product add constraint fk_factory_fid foreign key (factory_id) references factory(id);
+alter table factory_product add constraint fk_product_pid foreign key (product_id) references product(id);
+alter table store_product  add constraint fk_product_pid foreign key (productid) references product(id);
+alter table store_product  add constraint fk_store_sid foreign key (storeid) references store(id);
+alter table customerpurchases  add constraint fk_customer_cid foreign key (customerid) references customer(id);
+alter table customerpurchases  add constraint fk_store_sid foreign key (storeid) references store(id);
+alter table customerpurchases  add constraint fk_product_pid foreign key (productid) references product(id);
 
 
