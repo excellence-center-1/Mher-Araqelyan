@@ -1,3 +1,0 @@
-CREATE EXTENSION pgcrypto;
-CREATE TABLE users(id serial primary key,name varchar(15),password TEXT NOT NULL );
-INSERT INTO users (name, password) VALUES ('john',  crypt('johnspassword', gen_salt('bf')));
