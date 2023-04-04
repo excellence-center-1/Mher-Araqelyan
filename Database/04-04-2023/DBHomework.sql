@@ -1,4 +1,4 @@
-//2
+// 2 
 CREATE TABLE users2(id serial primary key,name varchar(15),password TEXT NOT NULL,age smallint,birthday SMALLINT, created_on timestamp default NOW(), updated_on timestamp default NOW());
 CREATE OR REPLACE FUNCTION birthday_insert_trigger_fnc2()
   RETURNS trigger AS
