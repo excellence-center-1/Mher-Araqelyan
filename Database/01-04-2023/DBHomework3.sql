@@ -62,3 +62,4 @@ UPDATE product  SET unit_id = 1  WHERE id = 2 ;
 UPDATE product  SET unit_id = 1  WHERE id = 3 ;
 alter table product add constraint fk_unit_uid foreign key (unit_id) references unit(id);
 
+
