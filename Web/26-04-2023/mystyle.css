@@ -1,0 +1,43 @@
+body {
+  background-color: #f0f2f5;
+}
+.registr{
+  width: 450px;
+  height: 550px;
+  background-color: white;
+  border-radius: 13px;
+  }
+ #fname{
+  margin-right: 5px;
+  height: 25px;
+ } 
+ #lname{
+  margin-left: 5px;
+  height: 25px;
+}
+#button {
+  background-color: #00a400;
+  color: white;
+  width: 200px;
+  height: 33px;
+  margin-top: 15px;
+}
+#phoneoremail{
+  width: 80%;
+  height: 25px;
+  margin-top: 10px;
+}
+#newpassword{
+  width: 80%;
+  margin-top: 10px;
+  height: 25px;
+}
+.birthdayclass{
+  margin-top: 10px;
+}
+.genderclass{
+  margin-top: 10px;
+}
+p {
+  font-size: 12px;
+}
