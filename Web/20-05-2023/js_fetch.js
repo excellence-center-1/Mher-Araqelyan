@@ -1,5 +1,4 @@
 function fetchData(url) {
-
     return new Promise((resolve, reject) => {
         let byindex = false;
         let index;
@@ -28,7 +27,6 @@ function fetchData(url) {
             .catch(error => reject(error.message));
     });
 }
-
 async function fetchDataAsync(url) {
     try {
         const data = await fetchData(url);
