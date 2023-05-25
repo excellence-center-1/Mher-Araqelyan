@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let audio = new Audio();
+  audio.src = './mixkit-video-game-win-2016.wav';
   let board = document.createElement("div");
   board.className = "board";
   document.body.appendChild(board);
@@ -39,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     cell.textContent = current_player;
     if (CheckWin()) {
+      document.body.style.backgroundColor="red";
+      audio.play();
       alert(`Player ${current_player} wins!`)
       resetGame();
       return;
