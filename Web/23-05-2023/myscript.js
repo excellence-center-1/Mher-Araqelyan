@@ -1,16 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let board = document.getElementsByClassName("board");
+  let board = document.createElement("div");
+  board.className = "board";
+  document.body.appendChild(board);
   //set styles for board
   let stylesForBoard = {
+    "position": "absolute",
+    "right": "40%",
     "background-color": "blue",
     "width": "330px",
     "display": "grid",
     "grid-template-columns": "repeat(3, 110px)",
     "gap": "2px"
   };
-  Object.assign(board[0].style, stylesForBoard);
-
-  cells = document.querySelectorAll(".cell");
+  Object.assign(board.style, stylesForBoard);
+  let cells = new Array();
+  for (let i = 0; i <= 8; i++) {
+    cells[i] = document.createElement("div");
+    cells[i].className = "cell";
+    board.appendChild(cells[i]);
+  }
   //set styles for cells
   let stylesForCells = {
     "background-color": "aqua",
@@ -23,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   cells.forEach(cell => { Object.assign(cell.style, stylesForCells); })
   let current_player = "x";
-// Function for click event
+  // Function for click event
   function cellClick(e) {
     const cell = e.target;
     if (cell.textContent !== '') {
@@ -51,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let combination of wincombinations) {
       const [a, b, c] = combination;
       if (cells[a].textContent === current_player &&
-        cells[b].textContent === current_player &&
-        cells[c].textContent === current_player
+          cells[b].textContent === current_player &&
+          cells[c].textContent === current_player
       ) {
         return true;
       }
