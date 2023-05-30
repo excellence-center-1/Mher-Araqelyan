@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.cards_divs[i].className = 'card';
         this.board.appendChild(this.cards_divs[i]);
         this.cards_divs[i].style.backgroundImage = `url(${this.cards[i].img_source})`;
+        this.cards_divs[i].style.backgroundSize="106%";
       }
       User.usersCount += 1;
     }
