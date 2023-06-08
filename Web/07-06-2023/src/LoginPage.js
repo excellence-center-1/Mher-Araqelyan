@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link, useNavigate} from 'react-router-dom';
 import './LoginPage.css'
 function LoginPage() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleUsernameChange = (e) => {
@@ -24,15 +25,16 @@ function LoginPage() {
     }
   };
   const navigateToSignup = () => {
-    const navigate = useNavigate();
-    navigate('/SignupPage');
+   
+    navigate('/signup');
+    
   };
   return (
-    <div id="Container">
-      <div id="login">
+    <div id="ContainerL">
+      <div id="loginL">
         <h2>Sign in</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div class="fields">
             <label>Username:</label>
             <input
               type="text"
@@ -40,7 +42,7 @@ function LoginPage() {
               onChange={handleUsernameChange}
             />
           </div>
-          <div>
+          <div class="fields">
             <label>Password: </label>
             <input
               type="password"

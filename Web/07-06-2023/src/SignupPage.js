@@ -32,48 +32,47 @@ function SignupPage() {
             alert("Please enter valid email");
         }
     };
-    return <div>
-        <div id="Container">
-            <div id="login">
-                <h2>Sign up</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            value={Name}
-                            onChange={handleNameChange}
-                        />
-                    </div>
-                    <div>
-                        <label>LastName:</label>
-                        <input
-                            type="text"
-                            value={LastName}
-                            onChange={handleLastNameChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            value={Email}
-                            onChange={handleEmailChange}
-                        />
-                    </div>
-                    <div>
-                        <label>New Password: </label>
-                        <input
-                            type="password"
-                            value={NewPassword}
-                            onChange={handleNewPasswordChange}
-                        />
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </form>
-            </div>
+    return <div id="ContainerS">
+        <div id="signup">
+            <h2>Sign up</h2>
+            <form onSubmit={handleSubmit}>
+                <div class="fields">
+                    <label>Name:</label>
+                    <input
+                        type="text"
+                        value={Name}
+                        onChange={handleNameChange}
+                    />
+                </div>
+                <div class="fields">
+                    <label>LastName:</label>
+                    <input
+                        type="text"
+                        value={LastName}
+                        onChange={handleLastNameChange}
+                    />
+                </div>
+                <div class="fields">
+                    <label>Email:</label>
+                    <input
+                        type="text"
+                        value={Email}
+                        onChange={handleEmailChange}
+                    />
+                </div>
+                <div class="fields">
+                    <label>New Password: </label>
+                    <input
+                        type="password"
+                        value={NewPassword}
+                        onChange={handleNewPasswordChange}
+                    />
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
         </div>
-    </div>;
+    </div>
+
 }
 
 export default SignupPage;
