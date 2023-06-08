@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, useNavigate} from 'react-router-dom';
 import './LoginPage.css'
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -23,6 +23,10 @@ function LoginPage() {
       alert("Please enter valid email");
     }
   };
+  const navigateToSignup = () => {
+    const navigate = useNavigate();
+    navigate('/SignupPage');
+  };
   return (
     <div id="Container">
       <div id="login">
@@ -45,8 +49,7 @@ function LoginPage() {
             />
           </div>
           <button type="submit">Login</button>
-          <button type="button">Sign up</button>
-          
+          <button type='button' onClick={navigateToSignup}>Sign up</button>
         </form>
       </div>
     </div>
