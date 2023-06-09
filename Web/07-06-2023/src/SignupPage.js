@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignupPage.css'
+import logo from './logo.jpeg'
 function SignupPage() {
     const [Name, setName] = useState('');
     const [LastName, setLastName] = useState('');
@@ -34,9 +35,12 @@ function SignupPage() {
     };
     return <div id="ContainerS">
         <div id="signup">
+        <div className='logo'>
+       <img src={logo} alt="BigCo Inc. logo"/>
+       </div>
             <h2>Sign up</h2>
             <form onSubmit={handleSubmit}>
-                <div class="fields">
+                <div className="fields">
                     <label>Name:</label>
                     <input
                         type="text"
@@ -44,7 +48,7 @@ function SignupPage() {
                         onChange={handleNameChange}
                     />
                 </div>
-                <div class="fields">
+                <div className="fields">
                     <label>LastName:</label>
                     <input
                         type="text"
@@ -52,7 +56,7 @@ function SignupPage() {
                         onChange={handleLastNameChange}
                     />
                 </div>
-                <div class="fields">
+                <div className="fields">
                     <label>Email:</label>
                     <input
                         type="text"
@@ -60,7 +64,7 @@ function SignupPage() {
                         onChange={handleEmailChange}
                     />
                 </div>
-                <div class="fields">
+                <div className="fields">
                     <label>New Password: </label>
                     <input
                         type="password"
@@ -72,7 +76,5 @@ function SignupPage() {
             </form>
         </div>
     </div>
-
 }
-
 export default SignupPage;

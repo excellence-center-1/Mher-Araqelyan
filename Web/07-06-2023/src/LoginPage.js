@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link, useNavigate} from 'react-router-dom';
 import './LoginPage.css'
+import logo from './logo.jpeg'
 function LoginPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -31,10 +32,14 @@ function LoginPage() {
   };
   return (
     <div id="ContainerL">
+       
       <div id="loginL">
+        <div className='logo'>
+       <img src={logo} alt="BigCo Inc. logo"/>
+       </div>
         <h2>Sign in</h2>
         <form onSubmit={handleSubmit}>
-          <div class="fields">
+          <div className="fields">
             <label>Username:</label>
             <input
               type="text"
@@ -42,7 +47,7 @@ function LoginPage() {
               onChange={handleUsernameChange}
             />
           </div>
-          <div class="fields">
+          <div className="fields">
             <label>Password: </label>
             <input
               type="password"
