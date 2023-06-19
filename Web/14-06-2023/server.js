@@ -2,7 +2,14 @@ const express = require('express')
 const fs = require('fs')
 const app = express()
 const port = 3001
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+function errorHandler(err, req, res, next) {
+  console.error(err);
+  res.status(500).send('Internal Server Error');
+  next(err);
+}
 app.get('/listUsers', (req, res) => {
   fs.readFile(__dirname + "/" + "users.json", 'utf8', (err, data) => {
     console.log(req.url);
@@ -10,12 +17,12 @@ app.get('/listUsers', (req, res) => {
   });
 })
 
-app.post('/addUser', (req, res) => {
+app.post('/addUser', (req, res,next) => {
   // Read the existing users from the file
   fs.readFile(__dirname + "/users.json", 'utf8', (err, data) => {
+    
     if (err) {
-      console.error(err);
-      return res.status(500).send('Internal Server Error');
+      return next(err);
     }
 
     // Parse the JSON data to an object
@@ -41,20 +48,19 @@ app.post('/addUser', (req, res) => {
     // Write the updated users back to the file
     fs.writeFile(__dirname + "/users.json", updatedUsers, (err) => {
       if (err) {
-        console.error(err);
-        return res.status(500).send('Internal Server Error');
+        return next(err);
       }
 
       res.status(200).send('User added successfully');
     });
   });
 });
-app.delete('/deleteUser/:id', (req, res) => {
+app.delete('/deleteUser/:id', (req, res, next) => {
   // Read the existing users from the file
+
   fs.readFile(__dirname + "/users.json", 'utf8', (err, data) => {
     if (err) {
-      console.error(err);
-      return res.status(500).send('Internal Server Error');
+      return next(err);
     }
 
     // Parse the JSON data to an object
@@ -74,8 +80,7 @@ app.delete('/deleteUser/:id', (req, res) => {
       // Write the updated users back to the file
       fs.writeFile(__dirname + "/users.json", updatedUsers, (err) => {
         if (err) {
-          console.error(err);
-          return res.status(500).send('Internal Server Error');
+          return next(err);
         }
 
         res.status(200).send('User deleted successfully');
@@ -86,6 +91,7 @@ app.delete('/deleteUser/:id', (req, res) => {
   });
 });
 
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
