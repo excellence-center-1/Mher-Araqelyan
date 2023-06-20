@@ -6,7 +6,7 @@
         "description": "Description of your API"
     },
     "paths": {
-        "/users": {
+        "/listUsers": {
             "get": {
                 "summary": "Get all users",
                 "description": "Retrieves a list of all users",
@@ -15,54 +15,21 @@
                         "description": "Successful response"
                     }
                 }
-            },
-            "post": {
-                "summary": "Create a new user",
-                "description": "Creates a new user",
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
+            }
+            
+        },
+        "/addUser":{
+           "post": {
+            "summary": "Create a new user",
+            "description": "Creates a new user,with the given body",
+            "responses": {
+                "200": {
+                    "description": "Successful response"
                 }
             }
+        }     
         },
-        "/users/{id}": {
-            "get": {
-                "summary": "Get a specific user",
-                "description": "Retrieves information about a specific user",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "integer",
-                        "description": "User ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update a specific user",
-                "description": "Updates information of a specific user",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "integer",
-                        "description": "User ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            },
+        "/deleteUser/{id}": {
             "delete": {
                 "summary": "Delete a specific user",
                 "description": "Deletes a specific user",
