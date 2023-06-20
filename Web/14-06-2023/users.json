@@ -1,4 +1,10 @@
 {
+  "user1": {
+    "name": "mahesh",
+    "password": "password1",
+    "profession": "teacher",
+    "id": 1
+  },
   "user2": {
     "name": "suresh",
     "password": "password2",
@@ -10,5 +16,29 @@
     "password": "password3",
     "profession": "clerk",
     "id": 3
+  },
+  "user4": {
+    "name": "John Doe",
+    "password": "secretpassword",
+    "profession": "Software Engineer",
+    "id": 4
+  },
+  "user5": {
+    "name": "Doe",
+    "password": "secretpassword",
+    "profession": "Software Engineer",
+    "id": 5
+  },
+  "user6": {
+    "name": "Doe",
+    "password": "secretpassword",
+    "profession": "Software Engineer",
+    "id": 6
+  },
+  "user7": {
+    "name": "Doe",
+    "password": "secretpassword",
+    "profession": "Software Engineer",
+    "id": 7
   }
 }

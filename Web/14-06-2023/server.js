@@ -5,6 +5,7 @@ const port = 3001
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(express.json());
 function errorHandler(err, req, res, next) {
   console.error(err);
   res.status(500).send('Internal Server Error');
@@ -33,9 +34,9 @@ app.post('/addUser', (req, res,next) => {
 
     // Create a new user object
     const newUser = {
-      name: "XXX",
-      password: "passwordXXX",
-      profession: "teacherXXX",
+      name: req.body.name,
+      password: req.body.password,
+      profession: req.body.profession,
       id: newUserId
     };
 
