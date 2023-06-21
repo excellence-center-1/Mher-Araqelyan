@@ -2,7 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
-
+import { ApolloProvider, ApolloClient, InMemoryCache, gql, useMutation, useQuery } from '@apollo/client';
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql', // Replace with the server's GraphQL endpoint
+  cache: new InMemoryCache(),
+});
 function App() {
  
   return (

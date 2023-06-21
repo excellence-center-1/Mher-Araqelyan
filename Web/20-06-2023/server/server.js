@@ -14,7 +14,6 @@ const pool = new Pool({
 
 const typeDefs = gql`
   type User {
-    id: ID!
     name: String!
     lastname: String!
     email: String!
@@ -26,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(id: ID!, name: String!,lastname: String!, email: String!, pass: String!): User!
+    createUser(name: String!,lastname: String!, email: String!, pass: String!): User!
   }
 `;
 
@@ -36,19 +35,17 @@ const resolvers = {
       const client = await pool.connect();
       const result = await client.query('SELECT * FROM users');
       client.release();
-
       return result.rows;
     },
   },
   Mutation: {
-    createUser: async (_, { id, name, lastname, email,pass }) => {
+    createUser: async (_, { name, lastname, email,pass }) => {
       const client = await pool.connect();
       const result = await client.query(
-        'INSERT INTO users (id,name,lastname, email,pass) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [id,name,lastname, email,pass]
+        'INSERT INTO users (name,lastname, email,pass) VALUES ($1, $2, $3, $4) RETURNING *',
+        [name,lastname, email,pass]
       );
       client.release();
-
       return result.rows[0];
     },
   },
@@ -56,10 +53,8 @@ const resolvers = {
 
 const startServer = async () => {
   const server = new ApolloServer({ typeDefs, resolvers });
-
   await server.start();
   server.applyMiddleware({ app });
-
   const port = 4000;
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}${server.graphqlPath}`);

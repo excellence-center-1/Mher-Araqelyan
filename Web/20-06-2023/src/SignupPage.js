@@ -9,7 +9,6 @@ const client = new ApolloClient({
 const GET_USERS = gql`
   query {
     users {
-      id
       name
       lastname
       email
@@ -18,9 +17,8 @@ const GET_USERS = gql`
   }
 `;
 const CREATE_USER = gql`
-  mutation CreateUser($id: ID!,$name: String!,$lastname: String!, $email: String!,$pass: String!) {
-    createUser(id:$id,name: $name, lastname : $lastname,email: $email,pass : $pass) {
-      id
+  mutation CreateUser($name: String!,$lastname: String!, $email: String!,$pass: String!) {
+    createUser(name: $name, lastname : $lastname,email: $email,pass : $pass) {
       name
       lastname
       email
@@ -29,31 +27,12 @@ const CREATE_USER = gql`
   }
 `;
 function SignupPage() {
-    
     const [Name, setName] = useState('');
     const [LastName, setLastName] = useState('');
     const [Email, setEmail] = useState('');
     const [NewPassword, setNewPassword] = useState('');
     const [createUser] = useMutation(CREATE_USER);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-
-    createUser({ variables: { name, email } })
-      .then(() => {
-        // Refetch the users after successful creation
-        // You can skip this if you're using real-time updates or subscriptions
-        client.resetStore();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    e.target.reset();
-  };
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
@@ -77,10 +56,7 @@ function SignupPage() {
             console.log(LastName);
             console.log(Email);
             console.log(NewPassword); */
-           
-            const name = e.target.name.value;
-            const email = e.target.email.value;
-            createUser({ variables: { name, email } })
+            createUser({ variables: {name: Name, lastname: LastName, email: Email, pass: NewPassword } })
                 .then(() => {
                     // Refetch the users after successful creation
                     // You can skip this if you're using real-time updates or subscriptions
@@ -89,6 +65,7 @@ function SignupPage() {
                 .catch((error) => {
                     console.error(error);
                 });
+                e.target.reset();
         } else {
             alert("Please enter valid email");
         }
@@ -136,8 +113,6 @@ function SignupPage() {
                 <button type="submit">Sign Up</button>
             </form>
         </div>
-    </div>
-    
-
+    </div>   
 }
 export default SignupPage;
