@@ -32,10 +32,11 @@ function LoginPage() {
                 if (response.ok) {
                     // Handle success
                     console.log('User logined successfully');
+                    const data = await response.json();
+                    console.log(data);
+                    
                     setTimeout(() => {
-
-                        navigate('/game');
-
+                        navigate('/game', { state: { gameData: data } });;
                     }, 1500);
                 } else {
                     // Handle error

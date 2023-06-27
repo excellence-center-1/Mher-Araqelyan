@@ -10,7 +10,8 @@ function App() {
     <Routes>
       <Route path='/register' exact element={<Registerpage/>} />
       <Route path='/login' exact element={<LoginPage/>} />
-      <Route path='/game' exact element={<Game/>} /> 
+      <Route path="/game" element={<Game />} />
+
       <Route path='/' element={<Navigate to='register' />} /> 
       
     </Routes>

@@ -1,5 +1,7 @@
 const Pool = require('pg').Pool
 const bcrypt = require('bcrypt');
+const { response } = require('express');
+const { request } = require('https');
 const pool = new Pool({
     user: 'myuser',
     host: 'localhost',
@@ -32,7 +34,16 @@ const getUserByEmail = (request, response) => {
                     throw bcryptError;
                 }
                 if (bcryptResult) {
-                    response.status(200).send('You are in the system');
+                    pool.query('SELECT levels.level FROM user_level JOIN levels ON user_level.level_id = levels.id WHERE user_id = $1', [user.id], (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            response.status(200).send({
+                                message: 'You are in the system',
+                                level: results.rows[0].level
+                            });
+                        }
+                    });
                 } else {
                     response.status(401).send('Invalid email or password');
                 }
@@ -42,6 +53,7 @@ const getUserByEmail = (request, response) => {
         }
     });
 };
+
 
 const createUser = (request, response) => {
     const { email, password } = request.body;
@@ -69,12 +81,19 @@ const createUser = (request, response) => {
                             }
 
                             response.status(201).send(`User added with ID: ${results.rows[0].id}`);
+                            pool.query('INSERT INTO user_level (user_id,level_id) VALUES($1,$2) RETURNING *', 
+                            [results.rows[0].id,1], (error, results) => {
+                                if (error) {
+                                    throw error;
+                                }
+                            })
                         }
                     );
+                   
                 }
 
             })
-
+            
         });
     });
 };
@@ -87,6 +106,9 @@ const deleteUser = (request, response) => {
         }
         response.status(200).send(`User deleted with ID: ${id}`)
     })
+}
+const getUserLevel=(request,response)=>{
+
 }
 module.exports = {
     getUsers,
