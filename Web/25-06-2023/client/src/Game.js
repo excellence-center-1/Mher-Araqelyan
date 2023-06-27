@@ -28,7 +28,6 @@ const wordsWithHints = {
     key: 'A small metal instrument used to unlock something',
 };
 
-
 const getRandomWord = () => {
     const keys = Object.keys(wordsWithHints);
     const randomIndex = Math.floor(Math.random() * keys.length);
@@ -83,7 +82,6 @@ const Game = () => {
     ));
 
     return (
-        
         <div className="container d-flex justify-content-center flex-column w-25 mt-5">
             <h1>Welcome To Game!</h1>
             <h2>{currentHint}</h2>
