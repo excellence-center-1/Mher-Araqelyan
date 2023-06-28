@@ -19,6 +19,7 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateEmail(email)) {
+            
             const userData = { email: email, password: password };
             try {
                 const response = await fetch('http://localhost:3000/login/users', {

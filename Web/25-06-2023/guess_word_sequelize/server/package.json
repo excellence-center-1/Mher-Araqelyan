@@ -12,6 +12,10 @@
     "pg": "^8.11.0",
     "sequelize": "^6.32.1"
   },
+  "scripts": {
+    "migrate": "sequelize-cli db:migrate",
+    "seeder": "sequelize-cli db:seed:all"
+  },
   "devDependencies": {
     "sequelize-cli": "^6.6.1"
   }

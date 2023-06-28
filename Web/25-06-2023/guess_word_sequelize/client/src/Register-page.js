@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignupPage.css'
 import { BrowserRouter as Router, Route, Link, useNavigate} from 'react-router-dom';
+import bcrypt from 'bcryptjs'
 function Registerpage() {
     const navigate = useNavigate();
     const [Email, setEmail] = useState('');
@@ -19,7 +20,9 @@ function Registerpage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateEmail(Email)) {
-            const userData = { email: Email, password: NewPassword };
+            const hash = bcrypt.hashSync(NewPassword, 10)
+            const userData = { email: Email, password: hash };
+            
             try {
                 const response = await fetch('http://localhost:3000/register/users', {
                     method: 'POST',

@@ -3,47 +3,49 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
-const wordsWithHints = {
-    cat: 'Furry animal with whiskers',
-    dog: 'Barks and wags its tail',
-    house: 'A place where people live',
-    car: 'A means of transportation',
-    sun: 'Source of light and heat',
-    book: 'A set of pages with text',
-    tree: 'Tall plant with branches and leaves',
-    chair: 'A piece of furniture for sitting',
-    apple: 'A round fruit with a red or green skin',
-    computer: 'An electronic device for processing data',
-    river: 'A large flowing body of water',
-    moon: 'The natural satellite of the Earth',
-    pen: 'A tool used for writing or drawing',
-    flower: 'The reproductive structure of a plant',
-    music: 'Organized sound with rhythm and melody',
-    mountain: 'A large landform that rises above the surrounding land',
-    beach: 'A sandy or pebbly shore by the ocean',
-    clock: 'A device for measuring and displaying time',
-    bicycle: 'A two-wheeled vehicle powered by pedals',
-    airplane: 'A powered flying vehicle with fixed wings and engines',
-    hat: 'A head covering typically worn for protection or fashion',
-    key: 'A small metal instrument used to unlock something',
-};
 
-const getRandomWord = () => {
+/* const getRandomWord = () => {
     const keys = Object.keys(wordsWithHints);
     const randomIndex = Math.floor(Math.random() * keys.length);
     const randomWord = keys[randomIndex];
     return randomWord;
-}
+} */
 
 const Game = () => {
-    const [currentWord, setCurrentWord] = useState(getRandomWord());
-    const [currentHint, setCurrentHint] = useState(wordsWithHints[currentWord]);
+    const [currentWord, setCurrentWord] = useState('');
+    const [currentHint, setCurrentHint] = useState('');
     const [message, setMessage] = useState('');
     const [inputValues, setInputValues] = useState(Array.from(currentWord, () => ''));
     const [score, setScore] = useState(0);
-    const location = useLocation();
-    const gameData = location.state && location.state.gameData;
-    
+    /* const location = useLocation();
+    const gameData = location.state && location.state.gameData; */
+    const fetchRandomWord = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/random-word', {
+                method: 'GET',
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setCurrentWord(data.word);
+                setCurrentHint(data.question);
+            } else {
+                console.error('Error retrieving random word', response.status);
+            }
+        } catch (error) {
+            console.error('Error retrieving random word', error);
+        }
+    };
+
+
+    useEffect( () => {
+         fetchRandomWord();
+      }, []);
+    useEffect( () => {
+         fetchRandomWord();
+      }, [score]);
+ 
+
+
     useEffect(() => {
         setInputValues(Array.from(currentWord, () => ''));
     }, [currentWord]);
@@ -62,10 +64,10 @@ const Game = () => {
         if (isCorrect) {
             setMessage('Congratulations! You guessed the word correctly!');
             setScore((prevScore) => prevScore + 1);
-            delete wordsWithHints[currentWord];
-            const newWord = getRandomWord();
+           /*  delete wordsWithHints[currentWord]; */
+            /* const newWord = getRandomWord();
             setCurrentWord(newWord);
-            setCurrentHint(wordsWithHints[newWord]);
+            setCurrentHint(wordsWithHints[newWord]); */
         } else {
             setMessage('Oops! Try again.');
         }
@@ -92,7 +94,7 @@ const Game = () => {
                 </button>
             </form>
             <p>{message} Your score is {score}</p>
-            <p>Your level is {gameData.level} </p>
+            <p>Your level is {/* {gameData.level} */} </p>
         </div>
     );
 };
