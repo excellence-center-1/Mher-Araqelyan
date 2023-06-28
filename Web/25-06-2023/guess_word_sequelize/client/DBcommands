@@ -1,0 +1,40 @@
+CREATE TABLE userinfo (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) ,
+    password VARCHAR(255) 
+);
+GRANT ALL PRIVILEGES ON TABLE userinfo TO myuser;
+GRANT USAGE, SELECT ON SEQUENCE userinfo_id_seq TO myuser;
+CREATE TABLE levels (
+    id SERIAL PRIMARY KEY,
+    level VARCHAR(255) ,
+    score INT 
+);
+GRANT ALL PRIVILEGES ON TABLE levels TO myuser;
+GRANT USAGE, SELECT ON SEQUENCE levels_id_seq TO myuser;
+CREATE TABLE user_level (
+    user_id INT,
+    level_id INT
+);
+GRANT ALL PRIVILEGES ON TABLE user_level TO myuser;
+GRANT USAGE, SELECT ON SEQUENCE user_level_id_seq TO myuser;
+alter table user_level add constraint fk_user_level_user foreign key (user_id) references user(id);
+alter table user_level add constraint fk_user_level_level foreign key (level_id) references levels(id);
+CREATE TABLE subscription (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+GRANT ALL PRIVILEGES ON TABLE subscription TO myuser;
+GRANT USAGE, SELECT ON SEQUENCE subscription_id_seq TO myuser;
+CREATE TABLE user_sub (
+    user_id INT,
+    sub_id INT
+);
+alter table user_sub add constraint fk_user_sub_user foreign key (user_id) references userinfo(id);
+alter table user_sub add constraint fk_user_sub_sub foreign key (sub_id) references subscription(id);
+GRANT ALL PRIVILEGES ON TABLE user_sub TO myuser;
+
+
+
+
+
