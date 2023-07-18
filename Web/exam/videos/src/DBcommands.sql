@@ -1,3 +1,5 @@
+CREATE USER myuser WITH PASSWORD 'mypass';
+\c myuser
 CREATE DATABASE exam;
 
 \c exam
@@ -6,11 +8,6 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255),
     password VARCHAR(255)         
-);
-
-CREATE TABLE users_videos (
-    id INT,
-    video_url VARCHAR(255)
 );
 
 GRANT ALL PRIVILEGES ON TABLE users TO myuser;
@@ -29,7 +26,7 @@ GRANT USAGE, SELECT ON SEQUENCE videos_id_seq TO myuser;
 CREATE TABOE users_videos(
     u_id INT,
     v_id INT
-)
+);
 GRANT ALL PRIVILEGES ON TABLE users_videos TO myuser;
 alter table users_videos add constraint fk_uid foreign key (u_id) references users(id);
 alter table users_videos add constraint fk_vid foreign key (v_id) references videos(id);
