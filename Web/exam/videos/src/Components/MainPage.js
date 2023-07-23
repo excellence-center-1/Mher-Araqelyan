@@ -119,8 +119,6 @@ const VideoGallery = () => {
           <div key={video.id} className="video-item">
             <h3>{video.title}</h3>
             <iframe
-              width="560"
-              height="315"
               src={video.url}
               title={video.title}
               frameBorder="0"
