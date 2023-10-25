@@ -8,7 +8,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   database: 'exam',
-  user: 'myuser',
+  user: 'mytestuser',
   password: 'mypass',
   host: 'localhost'
 });
@@ -41,10 +41,8 @@ app.post('/newuser', async (req, res) => {
       VALUES ${values.map((_, index) => `($${index * 2 + 1}, $${index * 2 + 2})`).join(', ')}
     `;
 
-    // Flatten the values array
     const flatValues = values.flat();
 
-    // Insert user-video relationships into the users_videos table
     await pool.query(insertQuery, flatValues);
 
     res.status(200).json({ message: 'User added successfully' });
