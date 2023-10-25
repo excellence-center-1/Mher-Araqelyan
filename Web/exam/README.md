@@ -1,5 +1,5 @@
 ## PostgreSQL Database Setup
-Follow these steps to set up your PostgreSQL database for the Smart Farm project:
+Follow these steps to set up your PostgreSQL database for Video Gallery:
 1. **Log in to your PostgreSQL server:**
     ```bash
     sudo su postgres
