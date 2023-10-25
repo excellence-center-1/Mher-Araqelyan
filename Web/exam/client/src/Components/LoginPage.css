@@ -1,7 +1,7 @@
 #ContainerL{
     display: flex;
     flex-direction: column;
-    width: 1500px;
+   
     height: 800px;
     position: relative;
     align-items: center;
