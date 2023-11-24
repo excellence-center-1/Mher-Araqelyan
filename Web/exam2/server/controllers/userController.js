@@ -1,7 +1,8 @@
-const ApiError = require("../error/ApiError")
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const{Users,Videos} = require('../models/models')
+const ApiError = require("../error/ApiError");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { Users, Videos } = require("../models/models");
+
 
 const generateJwt = (email) => {
     return jwt.sign(
@@ -42,7 +43,6 @@ class UserController {
     }
 
     async check(req, res, next) {
-        console.log(req.user)
         const token = generateJwt(req.user.email)
         return res.json({token})
     }

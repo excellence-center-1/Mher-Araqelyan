@@ -1,0 +1,9 @@
+@media screen and (min-width: 3000px) {
+    .email-text {
+        font-size: 1.5rem; /* Новый размер текста для больших экранов */
+    }
+
+    .logout-button {
+        width: 10%; /* Новая ширина кнопки для больших экранов */
+    }
+}

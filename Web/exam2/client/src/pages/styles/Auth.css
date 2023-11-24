@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 500px;
+  height: 300px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+.link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 200px;
+
+}
+
+.btn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}

@@ -1,8 +1,8 @@
-import React, { createContext } from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import UserStore from './store/UserStore';
-import VideoStore from './store/VideoStore';
+import React, { createContext } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import UserStore from "./store/UserStore";
+import VideoStore from "./store/VideoStore";
 export const Context = createContext(null)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

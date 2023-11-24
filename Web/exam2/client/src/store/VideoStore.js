@@ -1,36 +1,33 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export default class VideoStore {
     constructor() {
-        this._videos=[
+        this._videos = [
 
         ]
-        this._categories=[
-            {id:1,name :"All"},
-            {id:2,name:"Rock"},
-            {id:3,name:"Sport"},
-            {id:4,name:"Programming"},
+        this._categories = [
+
         ]
-        this._selectedCategory={}
+        this._selectedCategory = {}
         makeAutoObservable(this)
     }
 
     setVideos(videos) {
         this._videos = videos
     }
-    setCategories(categories){
-        this._categories=categories
+    setCategories(categories) {
+        this._categories = categories
     }
-    setSelectedCategory(category){
-        this._selectedCategory=category
+    setSelectedCategory(category) {
+        this._selectedCategory = category
     }
-    get videos () {
+    get videos() {
         return this._videos
     }
-    get categories(){
+    get categories() {
         return this._categories
     }
-    get selectedCategory(){
+    get selectedCategory() {
         return this._selectedCategory
     }
 }

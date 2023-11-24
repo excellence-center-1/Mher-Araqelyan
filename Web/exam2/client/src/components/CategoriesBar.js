@@ -1,8 +1,6 @@
-// CategoriesBar.js
-
 import React, { useContext } from "react";
 import { Context } from "../index";
-import "./styles/CategoriesBar.css"; 
+import "./styles/CategoriesBar.css";
 import { observer } from "mobx-react-lite";
 
 const CategoryCard = ({ name, onClick, isSelected }) => (
@@ -16,7 +14,6 @@ const CategoryCard = ({ name, onClick, isSelected }) => (
 
 const CategoriesBar = observer(() => {
   const { video } = useContext(Context);
-
   return (
     <div className="categories-bar">
       {video.categories.map((category) => (
