@@ -1,3 +1,22 @@
+# Video Gallery Application
+
+Welcome to the Video Gallery application – a platform that allows users to register, log in, and manage their video collection seamlessly.
+
+## Features
+
+- **User Authentication:**
+  - New users can register an account.
+  - Existing users can log in securely.
+
+- **Video Management:**
+  - Add new videos to your collection.
+    - Ensure uniqueness based on video name and URL.
+  - View a list of all your videos by category (including public videos that everyone can see).
+  - Edit details of existing videos.
+  - Delete videos from your collection.
+
+
+
 # Project build without docker
 ## PostgreSQL Database Setup
 Follow these steps to set up your PostgreSQL database for Video Gallery:
@@ -25,19 +44,52 @@ npm start
 ### Server installation
 ```bash
 cd server/
+npm install
 npm run dev
 ```
-the last command will run migrations and seeders if the tables do not exist, and then the server itself
+the last command will run migrations and seeders if the tables do not exist, and then the server itself on 5000 port
 
-**Grant  privileges:**
-```sql
-GRANT ALL PRIVILEGES ON TABLE users TO mytestuser;
-GRANT USAGE, SELECT ON SEQUENCE users_id_seq TO mytestuser;
-GRANT ALL PRIVILEGES ON TABLE videos TO mytestuser;
-GRANT USAGE, SELECT ON SEQUENCE videos_id_seq TO mytestuser;
-GRANT ALL PRIVILEGES ON TABLE users_videos TO mytestuser;
-``` 
+# Project build with docker
+To build and run the project using Docker, execute the following command:
 ```bash
-npm install
-npm start
+docker-compose up -d 
 ```
+This command will start the application in detached mode, creating and running containers for the client, server, and PostgreSQL database. It includes automatic setup of the database, migrations, seeders, and starting the server on port 5000.
+
+
+# Briefly About Project Features
+
+The project utilizes five distinct tables to efficiently manage user accounts, videos, categories, and user preferences.
+
+## Database Tables
+
+1. **Users:**
+    - Stores user credentials with email and securely hashed passwords.
+
+2. **Videos:**
+    - Contains details about videos, including title, URL, and whether they are public or private.
+    - Includes a foreign key linking to the `categories` table.
+
+3. **Users_Videos:**
+    - Serves as a junction table, establishing a many-to-many relationship between users and videos.
+
+4. **Categories:**
+    - Stores the names of video categories.
+
+5. **Deleted_Public_Videos:**
+    - Manages user preferences regarding public videos they choose not to display on their page.
+    - Includes the user ID and public video ID to customize the user experience.
+
+## Authentication with JWT Tokens
+
+- **JWT Token Generation:**
+    - The server generates JWT tokens upon successful login or registration by the user.
+
+- **Token Storage:**
+    - The JWT tokens are sent to the client and stored in the `localStorage` for secure session management.
+
+- **Token Attachments:**
+    - Each client request includes the JWT token, ensuring secure communication between the client and server.
+
+- **Server-Side Verification:**
+    - The server uses the `authMiddleware` to validate and authenticate requests by checking the attached JWT token.
