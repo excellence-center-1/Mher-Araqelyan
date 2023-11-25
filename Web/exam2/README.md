@@ -13,7 +13,7 @@ Welcome to the Video Gallery application – a platform that allows users to reg
     - Ensure uniqueness based on video name and URL.
   - View a list of all your videos by category (including public videos that everyone can see).
   - Edit details of existing videos.
-  - Delete videos from your collection.
+  - Delete videos from your collection( If you delete a public video, it will not be shown only for this user).
 
 
 
@@ -63,20 +63,20 @@ The project utilizes five distinct tables to efficiently manage user accounts, v
 
 ## Database Tables
 
-1. **Users:**
+1. **users:**
     - Stores user credentials with email and securely hashed passwords.
 
-2. **Videos:**
+2. **videos:**
     - Contains details about videos, including title, URL, and whether they are public or private.
     - Includes a foreign key linking to the `categories` table.
 
-3. **Users_Videos:**
+3. **users_videos:**
     - Serves as a junction table, establishing a many-to-many relationship between users and videos.
 
-4. **Categories:**
+4. **categories:**
     - Stores the names of video categories.
 
-5. **Deleted_Public_Videos:**
+5. **deleted_public_videos:**
     - Manages user preferences regarding public videos they choose not to display on their page.
     - Includes the user ID and public video ID to customize the user experience.
 

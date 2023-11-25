@@ -45,7 +45,6 @@ const Gallery = observer(() => {
       <button onClick={openModal} className="open-modal-button" type="button">Create Video</button>
       {isModalOpen && <ModalCreate closeModal={closeModal} />}
       <VideoList />
-
     </div>
   );
 });

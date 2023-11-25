@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles/DeleteConfirmationModal.css";
 const DeleteConfirmationModal = ({ handleClose, handleDelete }) => {
-
     const handleOverlayClick = () => {
         handleClose();
     };
