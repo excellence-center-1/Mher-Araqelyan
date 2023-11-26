@@ -15,10 +15,15 @@ const ModalCreate = ({ closeModal }) => {
   };
   const handlePostVideo = () => {
     if (newVideo.title.trim() !== "" && newVideo.url.trim() !== "") {
+      try {
       newVideo.url = convertToEmbedUrl(newVideo.url)
       createVideo(newVideo).then((data) => {
         closeModal();
       });
+    }
+    catch (error) {
+        window.alert(error.message);
+    }
     } else {
       window.alert("Please fill in all required fields.");
     }

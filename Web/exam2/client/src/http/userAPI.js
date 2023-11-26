@@ -20,6 +20,5 @@ export const check = async () => {
         const { data } = await $authHost.get('/user/auth');
         localStorage.setItem('token', data.token);
         return jwtDecode(data.token); 
-    }
-   
+    } 
 };

@@ -13,13 +13,18 @@ const EditModal = ({ handleClose, videoId }) => {
         url: video.videos.find(video => video.id == videoId).url
     });
     const handleEdit = async () => {
-        if (newVideo.title.trim() !== "" && newVideo.url.trim() !== "") {
-            newVideo.url = convertToEmbedUrl(newVideo.url)
-            await editVideo(newVideo);
-            await fetchVideos(video.selectedCategory.name).then((data) => {
-                video.setVideos(data);
-            });
-            handleClose();
+        if (newVideo.url && newVideo.title.trim() !== "" && newVideo.url.trim() !== "") {
+            try {
+                newVideo.url = convertToEmbedUrl(newVideo.url);
+                await editVideo(newVideo);
+                await fetchVideos(video.selectedCategory.name).then((data) => {
+                    video.setVideos(data);
+                });
+                handleClose();
+            }
+            catch (error) {
+                window.alert(error.message);
+            }
         } else {
             window.alert("Please fill in all required fields.");
         }
