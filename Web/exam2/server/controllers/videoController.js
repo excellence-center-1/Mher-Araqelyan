@@ -7,6 +7,7 @@ const { Sequelize, where } = require("sequelize");
 const ApiError = require("../error/ApiError");
 
 class VideoController {
+
   async getVideos(user_id, category) {
     const userVideosQuery = {
       where: { userId: user_id },
@@ -43,6 +44,46 @@ class VideoController {
     const user_videos = await UsersVideos.findAll(userVideosQuery);
     return user_videos;
   }
+
+  async getPublicVideos(user_id,category){
+    const publicDeletedVideoIds = await PublicDeleted.findAll({
+      attributes: ['videoId'],
+      where: { userId: user_id },
+      raw: true,
+    });
+    const excludedVideoIds = publicDeletedVideoIds.map(item => item.videoId);
+
+    const publicVideosQuery = {
+      where: {
+        is_public: true,
+        id: {
+          [Sequelize.Op.notIn]: excludedVideoIds,
+        },
+      },
+      attributes: [
+        'id',
+        'title',
+        'is_public',
+        'url',
+        [Sequelize.col('category.name'), 'category'],
+      ],
+      include: [
+        {
+          model: Categories,
+          attributes: [],
+          as: 'category',
+          where: {},
+        },
+      ],
+      raw: true,
+    };
+
+    if (category && category !== "All") {
+      publicVideosQuery.include[0].where.name = category;
+    }
+    const public_videos = await Videos.findAll(publicVideosQuery);
+    return public_videos;
+  }
   create = async (req, res, next) => {
     try {
       const email = req.user.email
@@ -51,8 +92,14 @@ class VideoController {
         where: { email: email },
       })
       const videos = await this.getVideos(user.id, category);
+      const public_videos= await this.getPublicVideos(user.id, category)
       let isDuplicate = false;
       videos.forEach(video => {
+        if (video.title === title && video.url === url) {
+          isDuplicate = true;
+        }
+      });
+      public_videos.forEach(video => {
         if (video.title === title && video.url === url) {
           isDuplicate = true;
         }
@@ -117,43 +164,8 @@ class VideoController {
       const user = await Users.findOne({
         where: { email: email },
       });
-      const publicDeletedVideoIds = await PublicDeleted.findAll({
-        attributes: ['videoId'],
-        where: { userId: user.id },
-        raw: true,
-      });
-      const excludedVideoIds = publicDeletedVideoIds.map(item => item.videoId);
-
-      const publicVideosQuery = {
-        where: {
-          is_public: true,
-          id: {
-            [Sequelize.Op.notIn]: excludedVideoIds,
-          },
-        },
-        attributes: [
-          'id',
-          'title',
-          'is_public',
-          'url',
-          [Sequelize.col('category.name'), 'category'],
-        ],
-        include: [
-          {
-            model: Categories,
-            attributes: [],
-            as: 'category',
-            where: {},
-          },
-        ],
-        raw: true,
-      };
-
-      if (category && category !== "All") {
-        publicVideosQuery.include[0].where.name = category;
-      }
       const userVideos = await this.getVideos(user.id, category)
-      const publicVideos = await Videos.findAll(publicVideosQuery);
+      const publicVideos = await this.getPublicVideos(user.id,category);
       const allVideos = [...userVideos, ...publicVideos];
       return res.json(allVideos);
     } catch (error) {
@@ -161,6 +173,7 @@ class VideoController {
       return next(ApiError.internal('Internal Server Error'));
     }
   }
+  
   edit = async (req, res, next) => {
     try {
       const { id, title, category, url } = req.body;
@@ -169,8 +182,15 @@ class VideoController {
         where: { email: email },
       });
       const videos = await this.getVideos(user.id, category);
+      const public_videos= await this.getPublicVideos(user.id, category)
       let isDuplicate = false;
+      
       videos.forEach(video => {
+        if (video.title === title && video.url === url) {
+          isDuplicate = true;
+        }
+      });
+      public_videos.forEach(video => {
         if (video.title === title && video.url === url) {
           isDuplicate = true;
         }
@@ -178,6 +198,7 @@ class VideoController {
       if (isDuplicate) {
         return res.status(400).json({ message: "Video with the same title and URL already exists." });
       }
+
       const video = await Videos.findOne({
         where: { id: id },
       });

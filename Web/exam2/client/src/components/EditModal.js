@@ -10,7 +10,7 @@ const EditModal = ({ handleClose, videoId }) => {
         id: videoId,
         title: "",
         category: "Rock",
-        url: "",
+        url: video.videos.find(video => video.id == videoId).url
     });
     const handleEdit = async () => {
         if (newVideo.title.trim() !== "" && newVideo.url.trim() !== "") {
@@ -49,7 +49,6 @@ const EditModal = ({ handleClose, videoId }) => {
                         </div>
                         <div className="modal-body">
                             <p>Edit your video</p>
-                            {/* You can add input fields, textareas, or other components for editing */}
                             <form>
                                 <label htmlFor="title">Title:</label>
                                 <input

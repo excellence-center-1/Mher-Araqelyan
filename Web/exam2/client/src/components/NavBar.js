@@ -3,8 +3,8 @@ import { Context } from "../index";
 import { LOGIN_ROUTE } from "../utils/consts";
 import { Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router-dom"
-import "./styles/NavBar.css"
+import { useNavigate } from "react-router-dom";
+import "./styles/NavBar.css";
 
 const NavBar = observer(() => {
     const { user } = useContext(Context);

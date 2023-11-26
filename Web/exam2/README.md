@@ -13,6 +13,7 @@ Welcome to the Video Gallery application – a platform that allows users to reg
     - Ensure uniqueness based on video name and URL.
   - View a list of all your videos by category (including public videos that everyone can see).
   - Edit details of existing videos.
+    - Ensure uniqueness based on video name and URL.
   - Delete videos from your collection( If you delete a public video, it will not be shown only for this user).
 
 
