@@ -53,7 +53,7 @@ const EditModal = ({ handleClose, videoId }) => {
                             <span className="close" onClick={handleClose}>&times;</span>
                         </div>
                         <div className="modal-body">
-                            <p>Edit your video</p>
+                            <h4>Edit your video</h4>
                             <form>
                                 <label htmlFor="title">Title:</label>
                                 <input

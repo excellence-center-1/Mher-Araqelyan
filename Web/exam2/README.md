@@ -93,4 +93,5 @@ The project utilizes five distinct tables to efficiently manage user accounts, v
     - Each client request includes the JWT token, ensuring secure communication between the client and server.
 
 - **Server-Side Verification:**
-    - The server uses the `authMiddleware` to validate and authenticate requests by checking the attached JWT token.
+    - The server uses the `authMiddleware` to validate and authenticate requests by checking the attached JWT token,
+    and also uses checkDuulateMiddleware to avoid duplicate videos with the same URL and title when creating or editing videos.

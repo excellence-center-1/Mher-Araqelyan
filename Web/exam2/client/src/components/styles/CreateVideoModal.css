@@ -13,12 +13,15 @@
 }
 
 .modal-content {
-
   background-color: #fefefe;
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 40%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+.modal-content h2,form{
+  text-align: center;
 }
 
 .close {
@@ -51,14 +54,14 @@ label {
   margin-bottom: 8px;
 }
 
-input,
-select {
+input,select {
   padding: 8px;
   margin-bottom: 16px;
 }
 
 .modal-save-button {
   width: 25%;
+  margin-left: 36%;
   padding: 10px 15px;
   background-color: #4caf50;
   color: #fff;

@@ -84,34 +84,16 @@ class VideoController {
     const public_videos = await Videos.findAll(publicVideosQuery);
     return public_videos;
   }
+  
   create = async (req, res, next) => {
     try {
-      const email = req.user.email
       const { title, category, url } = req.body
-      const user = await Users.findOne({
-        where: { email: email },
-      })
-      const videos = await this.getVideos(user.id, category);
-      const public_videos= await this.getPublicVideos(user.id, category)
-      let isDuplicate = false;
-      videos.forEach(video => {
-        if (video.title === title && video.url === url) {
-          isDuplicate = true;
-        }
-      });
-      public_videos.forEach(video => {
-        if (video.title === title && video.url === url) {
-          isDuplicate = true;
-        }
-      });
-      if (isDuplicate) {
-        return res.status(400).json({ message: "Video with the same title and URL already exists." });
-      }
+      const userId = req.user.id
       const categoryobj = await Categories.findOne({
         where: { name: category }
       })
       const video = await Videos.create({ title: title, url: url, categoryId: categoryobj.id })
-      const user_video = await UsersVideos.create({ userId: user.id, videoId: video.id })
+      const user_video = await UsersVideos.create({ userId: userId, videoId: video.id })
       return res.json(video)
     }
     catch (error) {
@@ -177,28 +159,6 @@ class VideoController {
   edit = async (req, res, next) => {
     try {
       const { id, title, category, url } = req.body;
-      const email = req.user.email;
-      const user = await Users.findOne({
-        where: { email: email },
-      });
-      const videos = await this.getVideos(user.id, category);
-      const public_videos= await this.getPublicVideos(user.id, category)
-      let isDuplicate = false;
-      
-      videos.forEach(video => {
-        if (video.title === title && video.url === url) {
-          isDuplicate = true;
-        }
-      });
-      public_videos.forEach(video => {
-        if (video.title === title && video.url === url) {
-          isDuplicate = true;
-        }
-      });
-      if (isDuplicate) {
-        return res.status(400).json({ message: "Video with the same title and URL already exists." });
-      }
-
       const video = await Videos.findOne({
         where: { id: id },
       });
