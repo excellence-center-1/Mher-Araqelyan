@@ -15,9 +15,6 @@ const Gallery = observer(() => {
 
   useEffect(() => {
     fetchVideos(null).then((data) => video.setVideos(data));
-  }, []);
-
-  useEffect(() => {
     fetchCategories().then((data) => video.setCategories(data));
   }, []);
 
@@ -37,7 +34,7 @@ const Gallery = observer(() => {
       video.setVideos(data);
     });
   };
-
+  
   return (
     <div className="gallery-container">
       <NavBar />
