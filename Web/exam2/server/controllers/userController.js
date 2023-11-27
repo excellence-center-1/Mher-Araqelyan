@@ -1,7 +1,7 @@
 const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Users, Videos } = require("../models/models");
+const { Users } = require("../models/models");
 
 
 const generateJwt = (email) => {
