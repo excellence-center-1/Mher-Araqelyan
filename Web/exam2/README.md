@@ -46,7 +46,7 @@ npm start
 ```bash
 cd server/
 npm install
-npm run dev
+npm run prod
 ```
 the last command will run migrations and seeders if the tables do not exist, and then the server itself on 5000 port
 
