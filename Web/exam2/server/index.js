@@ -14,18 +14,28 @@ app.use(router);
 app.use(errorHandler);
 
 const connectToDatabase = async () => {
-  const maxAttempts = 60; 
-  const delay = 1000; 
-  for (let i = 0; i < maxAttempts; i++) {
+  const maxAttempts = 60;
+  const delay = 1000;
+  let attempts = 0;
+  const tryConnect = async () => {
     try {
+      console.log(111);
       await sequelize.authenticate();
-      break;
+      clearInterval(retryInterval);
     } catch (error) {
       console.error('Failed to connect to the database. Retrying...');
-      await new Promise((resolve) => setTimeout(resolve, delay));
+      attempts++;
+      if (attempts >= maxAttempts) {
+        clearInterval(retryInterval);
+        console.error('Exceeded maximum connection attempts.');
+      }
     }
-  }
+  };
+  const retryInterval = setInterval(tryConnect, delay);
 };
+
+connectToDatabase();
+
 
 const start = async () => {
   try {
